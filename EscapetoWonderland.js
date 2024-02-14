@@ -34,10 +34,12 @@ class Player {
     }
 }
 
+
 function displayPuzzleIntro(puzzle) {
     console.log(puzzle.description);
     console.log(puzzle.question);
 }
+
 
 function displayZoneIntro(zone) {
     console.log(`Welcome to ${zone.name}!`);
@@ -46,6 +48,7 @@ function displayZoneIntro(zone) {
         console.log(`${index + 1}. ${puzzle.description}`);
     });
 }
+
 
 function solvePuzzle(player, zone, choice) {
     const puzzleIndex = parseInt(choice) - 1;
@@ -77,12 +80,13 @@ function solvePuzzle(player, zone, choice) {
 
             if (player.visas === 1) {
                 console.log("You've earned enough visas to proceed to the next zone.");
-
+            
                 if (zone.nextZone) {
                     displayZoneIntro(zone.nextZone);
                     choosePuzzle(player, zone.nextZone);
                 } else {
                     console.log("Congratulations! You've completed the game.");
+                   
                 }
             }
         } else {
@@ -90,7 +94,7 @@ function solvePuzzle(player, zone, choice) {
             setTimeout(() => {
                 displayZoneIntro(zone);
                 solvePuzzle(player, zone, choice);
-            }, 50000);
+            }, 5000);
         }
     });
 }
@@ -115,6 +119,9 @@ function choosePuzzle(player, zone) {
 
 const zone1 = new Zone("Survival District");
 const zone2 = new Zone("Casino of Fate");
+const zone3 = new Zone("Maze of Illusions");
+const zone4 = new Zone("Temple of Wisdom");
+const zone5 = new Zone("Grand Finale");
 
 zone1.addPuzzle(new Puzzle(
     "Abandoned Building Riddle",
@@ -126,11 +133,29 @@ zone2.addPuzzle(new Puzzle(
     "Win a game of blackjack against the dealer. What's the best sum of cards?",
     "21"
 ));
+zone3.addPuzzle(new Puzzle(
+    "Mirror Puzzle",
+    "Reflect on this: What is always in front of you but can't be seen?",
+    "future"
+));
+zone4.addPuzzle(new Puzzle(
+    "Ancient Riddle",
+    "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
+    "echo"
+));
+zone5.addPuzzle(new Puzzle(
+    "Final Challenge",
+    "Solve the final challenge to complete the game.",
+    "victory"
+));
 
-// Define next zones
-zone1.nextZone = zone2; // After completing zone1, player moves to zone2
 
-// Initialize player
+zone1.nextZone = zone2; 
+zone2.nextZone = zone3; 
+zone3.nextZone = zone4; 
+zone4.nextZone = zone5; 
+
+
 const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout
@@ -145,9 +170,9 @@ rl.question("Enter your name: ", (playerName) => {
 
     const player1 = new Player(playerName);
 
-    // Display initial zone
+  
     displayZoneIntro(zone1);
 
-    // Start game
+    
     choosePuzzle(player1, zone1);
 });
