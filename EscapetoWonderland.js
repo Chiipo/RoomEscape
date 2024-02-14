@@ -1,9 +1,10 @@
 const readline = require('readline');
 
 class Zone {
-    constructor(name) {
+    constructor(name, nextZone = null) {
         this.name = name;
         this.puzzles = [];
+        this.nextZone = nextZone;
     }
 
     addPuzzle(puzzle) {
@@ -50,7 +51,7 @@ function displayZoneIntro(zone) {
 }
 
 
-function solvePuzzle(player, zone, choice) {
+function solvePuzzle(player, zone, choice, timeout) {
     const puzzleIndex = parseInt(choice) - 1;
     const puzzle = zone.puzzles[puzzleIndex];
 
@@ -66,9 +67,21 @@ function solvePuzzle(player, zone, choice) {
         output: process.stdout
     });
 
+    let answered = false;
+
+    const timer = setTimeout(() => {
+        if (!answered) {
+            console.log("Time's up! You failed to answer within the time limit.");
+            rl.close();
+            return;
+        }
+    }, timeout);
+
     rl.question("Enter your answer: ", (playerInput) => {
+        clearTimeout(timer);
+        answered = true;
         rl.close();
-        
+
         if (!playerInput) {
             console.log("No answer provided. Please enter your answer.");
             return;
@@ -76,11 +89,11 @@ function solvePuzzle(player, zone, choice) {
 
         if (puzzle.solve(playerInput)) {
             player.earnVisas(1);
-            console.log("Congratulations! You earned a visa.");
+            console.log("Congratulations! You earned one visa. four more to go!" );
 
             if (player.visas === 1) {
                 console.log("You've earned enough visas to proceed to the next zone.");
-            
+                
                 if (zone.nextZone) {
                     displayZoneIntro(zone.nextZone);
                     choosePuzzle(player, zone.nextZone);
@@ -91,10 +104,11 @@ function solvePuzzle(player, zone, choice) {
             }
         } else {
             console.log("Sorry, that's not correct. Try again.");
+          
             setTimeout(() => {
                 displayZoneIntro(zone);
-                solvePuzzle(player, zone, choice);
-            }, 5000);
+                choosePuzzle(player, zone);
+            }, 10000);
         }
     });
 }
@@ -112,7 +126,7 @@ function choosePuzzle(player, zone) {
             choosePuzzle(player, zone);
             return;
         }
-        solvePuzzle(player, zone, choice);
+        solvePuzzle(player, zone, choice, 20000);
     });
 }
 
@@ -121,34 +135,54 @@ const zone1 = new Zone("Survival District");
 const zone2 = new Zone("Casino of Fate");
 const zone3 = new Zone("Maze of Illusions");
 const zone4 = new Zone("Temple of Wisdom");
-const zone5 = new Zone("Grand Finale");
+const zone5 = new Zone("It's the Grand Finale");
 
 zone1.addPuzzle(new Puzzle(
-    "Abandoned Building Riddle",
-    "Solve the riddle of the abandoned building: 'What has keys but can't open locks?'",
-    "piano"
+    "Riddle Me This",
+    "What has a head, a tail, but no body?",
+    "coin"
+));
+zone1.addPuzzle(new Puzzle(
+    "Math Challenge",
+    "What is the result of 5 * 5?",
+    "25"
+));
+
+zone2.addPuzzle(new Puzzle(
+    "Code Breaker",
+    "Decode this word: cafe",
+    "face"
 ));
 zone2.addPuzzle(new Puzzle(
-    "Blackjack Challenge",
-    "Win a game of blackjack against the dealer. What's the best sum of cards?",
-    "21"
+    "Dice Roll",
+    "What is the sum of numbers when two six-sided dice are rolled?",
+    "7"
 ));
 zone3.addPuzzle(new Puzzle(
     "Mirror Puzzle",
-    "Reflect on this: What is always in front of you but can't be seen?",
+    "What is always in front of you but can't be seen?",
     "future"
+));
+zone3.addPuzzle(new Puzzle(
+    "Word Jumble",
+    "Rearrange the letters: stressed (Hint: It's something you eat)",
+    "desserts"
 ));
 zone4.addPuzzle(new Puzzle(
     "Ancient Riddle",
-    "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",
-    "echo"
+    "What has keys but can't open locks?",
+    "piano"
+));
+zone4.addPuzzle(new Puzzle(
+    "Color Puzzle",
+    "What color is formed by mixing blue and yellow?",
+    "green"
 ));
 zone5.addPuzzle(new Puzzle(
     "Final Challenge",
     "Solve the final challenge to complete the game.",
     "victory"
 ));
-
 
 zone1.nextZone = zone2; 
 zone2.nextZone = zone3; 
@@ -170,7 +204,7 @@ rl.question("Enter your name: ", (playerName) => {
 
     const player1 = new Player(playerName);
 
-  
+ 
     displayZoneIntro(zone1);
 
     
