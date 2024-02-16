@@ -34,7 +34,7 @@ zone1.addPuzzle(new Puzzle(
 
 zone1.addPuzzle(new Puzzle(
 "Code Breaker",
-"Decrypt this word: nadnolrwne",
+"Decrypt this word: nadnolrwde ",
 "Wonderland"
 ));
 
