@@ -1,11 +1,15 @@
 {
-  "name": "roomescape",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "chipo",
-  "license": "ISC"
+"name": "roomescape",
+"version": "1.0.0",
+"description": "",
+"main": "EscapetoWonderland.js",
+"scripts": {
+"start": "node EscapetoWonderland.js",
+"test": "echo \"Error: no test specified\" && exit 1"
+},
+"author": "chipo",
+"license": "ISC",
+"dependencies": {
+"readline-sync": "^1.4.10"
+}
 }
