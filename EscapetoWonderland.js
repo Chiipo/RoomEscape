@@ -56,10 +56,10 @@ zone3.addPuzzle(new Puzzle(
 "Riddle Me This!",
 "What is something you can keep after giving it to someone else",
 "A promise"
- ));
+));
 zone3.addPuzzle(new Puzzle(
 "Decrypt this phrase",
-"yjgm lwafjxw htiulw",
+"teh azme tixe dnif",
 "Find the maze exit."
 ));
 
