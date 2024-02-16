@@ -25,7 +25,7 @@ startGame(name);
 function startGame(name) {
 const player = new Player(name);
 
-const zone1 = new Zone("Down the Rabbit Hole");
+const zone1 = new Zone(" Zone 1 - Down the Rabbit Hole");
 zone1.addPuzzle(new Puzzle(
 "Riddle Me This!",
 "What is so fragile that saying its name breaks it??",
@@ -34,11 +34,11 @@ zone1.addPuzzle(new Puzzle(
 
 zone1.addPuzzle(new Puzzle(
 "Code Breaker",
-"Decrypt this word: qadnolrwne",
+"Decrypt this word: nadnolrwde ", 
 "Wonderland"
 ));
 
-const zone2 = new Zone("Madhatters's Casino");
+const zone2 = new Zone(" Zone 2 - Madhatters's Casino");
 zone2.addPuzzle(new Puzzle(
 "Word Jumble",
 "Unscramble the letters: tartyhatter",
@@ -51,7 +51,7 @@ zone2.addPuzzle(new Puzzle(
 "98"
 ));
 
-const zone3 = new Zone("Maze of Illusions");
+const zone3 = new Zone(" Zone 3 - Maze of Illusions");
 zone3.addPuzzle(new Puzzle(
 "Riddle Me This!",
 "What is something you can keep after giving it to someone else",
@@ -63,7 +63,7 @@ zone3.addPuzzle(new Puzzle(
 "Find the maze exit."
 ));
 
-const zone4 = new Zone("Temple of Wisdom");
+const zone4 = new Zone("Zone 4 - Temple of Wisdom");
 zone4.addPuzzle(new Puzzle(
 "What a Riddle",
 "What comes once in a minute, twice in a moment, but never in a thousand years?",
@@ -76,7 +76,7 @@ zone4.addPuzzle(new Puzzle(
 "green"
  ));
 
-const zone5 = new Zone("It's the Grand Finale");
+const zone5 = new Zone("Zone 5 - It's the Grand Finale");
 zone5.addPuzzle(new Puzzle(
 "Final Challenge",
 "I speak without a mouth and hear without ears. I have no body, but I come alive with wind. What am I?",

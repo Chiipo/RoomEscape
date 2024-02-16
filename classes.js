@@ -18,7 +18,7 @@ this.nextZone = nextZone;
     
 addPuzzle(puzzle) {
 this.puzzles.push(puzzle);
-    }
+}
 }
 
 class Puzzle {
